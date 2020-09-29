@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title>HR Employee Attrition</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="../static/css/style.css">
+    </head>
+    <body>
+        <h1>Employee Attrition</h1>
+        <hr>
+        <h3 style="text-align:center;color:#98F000;">{{final_text}}</h3>
+        <form action={{url_for('y_predict')}} method="post">
+            <div class="form-group">
+              <label for="age">Age:</label>
+              <input type="text" name="age" class="form-control" id="age" pattern="\d*">
+            </div>
+            <div class="form-group">
+              <label for="dRate">Daily Rate:</label>
+              <input type="text" name="dRate" class="form-control" id="dRate" pattern="\d*">
+            </div>
+            <div class="form-group">
+              <label for="dist">Distance From Home (Km):</label>
+              <input type="text" name="dist" class="form-control" id="dist" pattern="\d*">
+            </div>
+            <div class="form-group">
+              <label for="edu">Education (yrs):</label>
+              <input type="text" name="edu" class="form-control" id="edu" pattern="\d*">
+            </div>
+            <div class="form-group">
+              <p>Environment Satisfaction:</p>
+              <label class="radio-inline"><input type="radio" name="envradio" value="1"checked>1</label>
+              <label class="radio-inline"><input type="radio" name="envradio" value="2">2</label>
+              <label class="radio-inline"><input type="radio" name="envradio" value="3">3</label>
+              <label class="radio-inline"><input type="radio" name="envradio" value="4">4</label>
+            </div>
+            <div class="form-group">
+            <p>Gender:</p>
+                <label class="radio-inline"><input type="radio" name="Genderradio" value="1" checked>Male</label>
+                <label class="radio-inline"><input type="radio" name="Genderradio" value="0">Female</label>
+            </div>
+            <div class="form-group">
+              <label for="hrr">Hourly Rate:</label>
+              <input type="text" name="hrr" class="form-control" id="hrr" pattern="\d*">
+            </div>
+            <div class="form-group">
+              <p>Job Involvement:</p>
+              <label class="radio-inline"><input type="radio" name="JIradio" value="1" checked>1</label>
+              <label class="radio-inline"><input type="radio" name="JIradio" value="2">2</label>
+              <label class="radio-inline"><input type="radio" name="JIradio" value="3">3</label>
+              <label class="radio-inline"><input type="radio" name="JIradio" value="4">4</label>
+            </div>
+            <div class="form-group">
+              <p>Job Level:</p>
+              <label class="radio-inline"><input type="radio" name="JLradio" value="1" checked>1</label>
+              <label class="radio-inline"><input type="radio" name="JLradio" value="2">2</label>
+              <label class="radio-inline"><input type="radio" name="JLradio" value="3">3</label>
+              <label class="radio-inline"><input type="radio" name="JLradio" value="4">4</label>
+              <label class="radio-inline"><input type="radio" name="JLradio" value="5">5</label>
+            </div>
+            <div class="form-group">
+              <p>Job Satisfaction:</p>
+              <label class="radio-inline"><input type="radio" name="JSradio" checked value="1">1</label>
+              <label class="radio-inline"><input type="radio" name="JSradio" value="2">2</label>
+              <label class="radio-inline"><input type="radio" name="JSradio" value="3">3</label>
+              <label class="radio-inline"><input type="radio" name="JSradio" value="4">4</label>
+            </div>
+            <div class="form-group">
+              <label for="MI">Monthly Income:</label>
+              <input type="text" name="MI" class="form-control" id="MI" pattern="\d*">
+            </div>
+            <div class="form-group">
+              <label for="Mrate">Monthly Rate:</label>
+              <input type="text"name="Mrate"  class="form-control" id="Mrate" pattern="\d*">
+            </div>
+            <div class="form-group">
+              <label for="NumComp">Number of Companies Worked:</label>
+              <input type="text" name="NumComp" class="form-control" id="NumComp" pattern="\d*">
+            </div>
+            <div class="form-group">
+              <p>Overtime:</p>
+              <label class="radio-inline"><input type="radio" name="Overtimeradio" value="1" checked>Yes</label>
+              <label class="radio-inline"><input type="radio" name="Overtimeradio" value="0">No</label>
+            </div>
+            <div class="form-group">
+              <label for="PercentHike">Percentage Salary Hike:</label>
+              <input type="text" name="PercentHike" class="form-control" id="PercentHike" pattern="\d*">
+            </div>
+            <div class="form-group">
+              <p>Performance Rating:</p>
+              <label class="radio-inline"><input type="radio" name="PerfRateradio" value="1" checked>1</label>
+              <label class="radio-inline"><input type="radio" name="PerfRateradio" value="2" >2</label>
+              <label class="radio-inline"><input type="radio" name="PerfRateradio" value="3">3</label>
+              <label class="radio-inline"><input type="radio" name="PerfRateradio" value="4">4</label>
+              <label class="radio-inline"><input type="radio" name="PerfRateradio" value="5">5</label>
+            </div>
+            <div class="form-group">
+              <p>Relationship Satisfaction:</p>
+              <label class="radio-inline"><input type="radio" name="RSradio" value="1" checked>1</label>
+              <label class="radio-inline"><input type="radio" name="RSradio" value="2">2</label>
+              <label class="radio-inline"><input type="radio" name="RSradio" value="3">3</label>
+              <label class="radio-inline"><input type="radio" name="RSradio" value="4">4</label>
+            </div>
+            <div class="form-group">
+              <p>Stock Option Level:</p>
+              <label class="radio-inline"><input type="radio" name="StockOLradio" value="0" checked>0</label>
+              <label class="radio-inline"><input type="radio" name="StockOLradio" value="1">1</label>
+              <label class="radio-inline"><input type="radio" name="StockOLradio" value="2">2</label>
+              <label class="radio-inline"><input type="radio" name="StockOLradio" value="3">3</label>
+            </div>
+            <div class="form-group">
+              <label for="WorkingYrs">Total Working Years:</label>
+              <input type="text" name="WorkingYrs" class="form-control" id="WorkingYrs" pattern="\d*">
+            </div>
+            <div class="form-group">
+              <label for="TTLY">Training Times Last Year:</label>
+              <input type="text" name="TTLY" class="form-control" id="TTLY" pattern="\d*">
+            </div>
+            <div class="form-group">
+              <p>Work Life Balance:</p>
+              <label class="radio-inline"><input type="radio" name="WLbalanceradio" value="0"checked>0</label>
+              <label class="radio-inline"><input type="radio" name="WLbalanceradio" value="1">1</label>
+              <label class="radio-inline"><input type="radio" name="WLbalanceradio" value="2">2</label>
+              <label class="radio-inline"><input type="radio" name="WLbalanceradio" value="3">3</label>
+            </div>
+            <div class="form-group">
+              <label for="YrsComp">Years at Company:</label>
+              <input type="text" name="YrsComp" class="form-control" id="YrsComp" pattern="\d*">
+            </div>
+            <div class="form-group">
+              <label for="YrsCurrent">Years in Current Role:</label>
+              <input type="text" name="YrsCurrent" class="form-control" id="YrsCurrent" pattern="\d*">
+            </div>
+            <div class="form-group">
+              <label for="YrsPromotion">Years since last promotion:</label>
+              <input type="text" name="YrsPromotion" class="form-control" id="YrsPromotion" pattern="\d*">
+            </div>
+            <div class="form-group">
+              <label for="YrsCurrManager">Years with Current Manager:</label>
+              <input type="text" name="YrsCurrManager" class="form-control" id="YrsCurrManager" pattern="\d*">
+            </div>
+            <div class="form-group">
+                <p>Business Travel:</p>
+                <label class="radio-inline"><input type="radio" name="Bradio" value="1" checked>Non Travel</label>
+                <label class="radio-inline"><input type="radio" name="Bradio" value="2">Travel Frequently</label>
+                <label class="radio-inline"><input type="radio" name="Bradio" value="3">Travel Rarely</label>
+            </div>
+            <div class="form-group">
+                <p>Department:</p>
+                <label class="radio-inline"><input type="radio" name="Deptradio" value="1" checked>Human Resources</label>
+                <label class="radio-inline"><input type="radio" name="Deptradio" value="2">Research and Development</label>
+                <label class="radio-inline"><input type="radio" name="Deptradio" value="3">Sales</label>
+            </div>
+            <div class="form-group">
+              <label for="EduField">Education Field:</label>
+              <select class="form-control" id="EduField" name="EduField">
+                <option value="1">Human Resources</option>
+                <option value="2">Life Sciences</option>
+                <option value="3">Field Marketing</option>
+                <option value="4">Medical</option>
+                <option value="5">Technical Degree</option>
+                <option value="6">Other</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="JobRole">Job Role:</label>
+              <select class="form-control" id="JobRole" name="JobRole">
+                <option value="1">Healthcare Representative</option>
+                <option value="2">Human Resources</option>
+                <option value="3">Laboratory Technician</option>
+                <option value="4">Manager</option>
+                <option value="5">Manufacturing Director</option>
+                <option value="6">Research Director</option>
+                <option value="7">Research Scientist</option>
+                <option value="8">Sales Executive</option>
+                <option value="9">Sales Representative</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <p>Marital Status:</p>
+              <label class="radio-inline"><input type="radio" name="MaritalStatusradio" value="1" checked>Divorced</label>
+              <label class="radio-inline"><input type="radio" name="MaritalStatusradio" value="2">Married</label>
+              <label class="radio-inline"><input type="radio" name="MaritalStatusradio" value="3">Single</label>
+            </div>
+            <input type="submit" value="Submit" id="button">
+        </form>
+    </body>
+</html>
