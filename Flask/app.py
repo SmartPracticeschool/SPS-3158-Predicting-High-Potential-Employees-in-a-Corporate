@@ -4,7 +4,7 @@ import json
 import requests
 
 app = Flask(__name__)
-URL = "https://2adyrn75gi.execute-api.us-east-1.amazonaws.com/test/employeeattrition"
+URL = "https://jjyhrpmbd5.execute-api.us-east-1.amazonaws.com/test/employee"
 
 @app.route('/')
 def home():
@@ -14,6 +14,7 @@ def home():
 def y_predict():
     req = request.form
     age = req.get('age')
+    att = req.get('attradio')
     dRate = req.get('dRate')
     dist = req.get('dist')
     edu = req.get('edu')
@@ -211,14 +212,14 @@ def y_predict():
         div = 0
         mar = 0
         sing = 1
-    print(age,dRate,dist,edu,envradio,Genderradio,hrr,JIradio,JLradio,JSradio,
-          MI,Mrate,NumComp,Overtimeradio,PercentHike,PerfRateradio,RSradio,StockOLradio,
+    print(age,att,dRate,dist,edu,envradio,Genderradio,hrr,JIradio,JLradio,JSradio,
+          MI,Mrate,NumComp,Overtimeradio,PercentHike,RSradio,StockOLradio,
           WorkingYrs,TTLY,WLbalanceradio,YrsComp,YrsCurrent,YrsPromotion,YrsCurrManager,
           travel_r,travel_freq,Non_travel,sales,RnD,hRes,ls_field,med_field,fm_field,
           td_field,hr_field,o_field,rs_jr,lt_jr,se_jr,md_jr,health_jr,sr_jr,rd_jr,
           man_jr,hr_jr,sing,mar,div)
-    body_list = [age,dRate,dist,edu,envradio,Genderradio,hrr,JIradio,JLradio,JSradio,
-          MI,Mrate,NumComp,Overtimeradio,PercentHike,PerfRateradio,RSradio,StockOLradio,
+    body_list = [age,att,dRate,dist,edu,envradio,Genderradio,hrr,JIradio,JLradio,JSradio,
+          MI,Mrate,NumComp,Overtimeradio,PercentHike,RSradio,StockOLradio,
           WorkingYrs,TTLY,WLbalanceradio,YrsComp,YrsCurrent,YrsPromotion,YrsCurrManager,
           travel_r,travel_freq,Non_travel,sales,RnD,hRes,ls_field,med_field,fm_field,
           td_field,hr_field,o_field,rs_jr,lt_jr,se_jr,md_jr,health_jr,sr_jr,rd_jr,
@@ -232,10 +233,16 @@ def y_predict():
     print(r)
     print(r.status_code, r.reason, r.text)
     r_text  = r.text.strip('\"')
-    if(r_text == "Yes"):
-        final_text = 'Attrition : {}. Employee is likely to leave.'.format(r_text)
-    else:
-        final_text = 'Attrition : {}. Employee is not likely to leave.'.format(r_text)
+    if(r_text == "Bad"):
+        final_text = 'Rating : {}.Needs to improve a lot.'.format(r_text)
+    elif(r_text == "Not Satisfactory"):
+        final_text = 'Rating : {}. A lot of room for improvement.'.format(r_text)
+    elif(r_text == "Satisfactory"):
+        final_text = 'Rating : {}.There is still room for improvement.'.format(r_text)
+    elif(r_text == "Good!"):
+        final_text = 'Rating : {} Performance is above average!'.format(r_text)
+    elif(r_text == "Great!"):
+        final_text = 'Rating : {} Outstanding Performance!'.format(r_text)
     return render_template('index.html',final_text = final_text)
 
 if __name__ == '__main__':
