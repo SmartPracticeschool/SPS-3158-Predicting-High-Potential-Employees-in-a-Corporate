@@ -2,18 +2,23 @@
 <html lang="en" dir="ltr">
     <head>
         <meta charset="utf-8">
-        <title>HR Employee Attrition</title>
+        <title>HR Employee Performance</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
         <link rel="stylesheet" href="../static/css/style.css">
     </head>
     <body>
-        <h1>Employee Attrition</h1>
+        <h1>Employee Performance</h1>
         <hr>
         <h3 style="text-align:center;color:#98F000;">{{final_text}}</h3>
         <form action={{url_for('y_predict')}} method="post">
             <div class="form-group">
               <label for="age">Age:</label>
               <input type="text" name="age" class="form-control" id="age" pattern="\d*">
+            </div>
+            <div class="form-group">
+              <p>Attrition:</p>
+              <label class="radio-inline"><input type="radio" name="attradio" value="1" checked>Yes</label>
+              <label class="radio-inline"><input type="radio" name="attradio" value="0">No</label>
             </div>
             <div class="form-group">
               <label for="dRate">Daily Rate:</label>
@@ -85,14 +90,6 @@
             <div class="form-group">
               <label for="PercentHike">Percentage Salary Hike:</label>
               <input type="text" name="PercentHike" class="form-control" id="PercentHike" pattern="\d*">
-            </div>
-            <div class="form-group">
-              <p>Performance Rating:</p>
-              <label class="radio-inline"><input type="radio" name="PerfRateradio" value="1" checked>1</label>
-              <label class="radio-inline"><input type="radio" name="PerfRateradio" value="2" >2</label>
-              <label class="radio-inline"><input type="radio" name="PerfRateradio" value="3">3</label>
-              <label class="radio-inline"><input type="radio" name="PerfRateradio" value="4">4</label>
-              <label class="radio-inline"><input type="radio" name="PerfRateradio" value="5">5</label>
             </div>
             <div class="form-group">
               <p>Relationship Satisfaction:</p>
